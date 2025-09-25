@@ -1,5 +1,5 @@
 
-# Reproducing “SpRePE: A Spherical Geometry-Aware Position Embedding for Vision Transformers”
+# SpRePE: A Spherical Geometry-Aware Position Embedding for Vision Transformers
 
 This repository is for reproducing the results of the paper **“SpRePE: A Spherical Geometry-Aware Position Embedding for Vision Transformers”**
 The codebase is adapted from: [https://github.com/NVIDIA/makani/tree/main](https://github.com/NVIDIA/makani/tree/main).
