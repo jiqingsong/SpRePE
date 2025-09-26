@@ -1,0 +1,108 @@
+full_field: &BASE_CONFIG
+
+    # metadata file for the dataset
+    metadata_json_path: 
+
+    # data 
+    train_data_path: 
+    valid_data_path: 
+    exp_dir: 
+    n_years: 1
+    img_shape_x: 128
+    img_shape_y: 256
+
+    # files used for normalization of the data
+    min_path: 
+    max_path: 
+    time_means_path:   
+    global_means_path: 
+    global_stds_path:  
+    time_diff_means_path:  
+    time_diff_stds_path: 
+
+    # training parameters
+    loss: "absolute squared geometric l2"
+    channel_weights: "auto"
+    lr: 5E-4
+    n_train_samples_per_epoch: 5844
+    n_eval_samples: 1280
+    max_epochs: 20
+    weight_decay: 0.0
+
+    # scheduler settings
+    scheduler: "CosineAnnealingLR"
+    scheduler_T_max: 20
+    lr_warmup_steps: 0
+
+    # dropouts
+    path_drop_rate: 0.
+    mlp_drop_rate: 0.
+    attn_drop_rate: 0.
+
+    # wireup stuff
+    wireup_info: "mpi"
+    wireup_store: "tcp"
+
+    num_data_workers: 1
+    num_visualization_workers: 1
+    dt: 1 # how many timesteps ahead the model will predict
+    n_history: 0 #how many previous timesteps to consider
+    prediction_type: "iterative"
+    prediction_length: 35 #applicable only if prediction_type == "iterative"
+    n_initial_conditions: 5 #applicable only if prediction_type == "iterative"
+    valid_autoreg_steps: 39 # number of autoregressive steps for validation
+
+    ics_type: "specify_number"
+    save_raw_forecasts: !!bool True
+    save_channel: !!bool False
+    masked_acc: !!bool False
+    maskpath: None
+    perturb: !!bool False
+    add_noise: !!bool False
+    noise_std: 0.
+
+    # network related
+    nettype: "ViT"
+    depth: 12
+    model_grid_type: "equiangular"
+    patch_size: [2, 2]
+    num_heads: 8
+    embed_dim: 384
+    normalization_layer: "layer_norm"
+    pos_embed_scheme: 'sprepe'
+
+    target: "default" 
+
+    normalization: "zscore" #options zscore or minmax
+    hard_thresholding_fraction: 1.0
+  
+    # extra channels
+    add_grid: !!bool False
+    gridtype: "sinusoidal"
+    grid_num_frequencies: 16
+    roll: !!bool False
+    add_zenith: !!bool True
+    # invariants
+    add_orography: !!bool True
+    orography_path: 
+    add_landmask: !!bool True
+    landmask_path: 
+
+
+    finetune: !!bool False
+
+    log_to_screen: !!bool True
+    log_to_wandb: !!bool True
+    log_video: 10 # if > 0 will log every i-th epoch
+    save_checkpoint: !!bool True
+
+    optimizer_type: "Adam"
+    optimizer_beta1: 0.9
+    optimizer_beta2: 0.999
+    optimizer_max_grad_norm: 1.0 
+
+
+vit_73ch: &VIT_73CH
+    <<: *BASE_CONFIG
+
+    max_epochs: 20
