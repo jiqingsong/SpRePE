@@ -1,0 +1,88 @@
+full_field: &BASE_CONFIG
+
+    # metadata file for the dataset
+    metadata_json_path: 
+
+    # data 
+    train_data_path: 
+    valid_data_path:
+    test_data_path:
+    exp_dir: 
+    n_years: 1
+    img_shape_x: 256
+    img_shape_y: 512
+    n_history: -1
+    channel_weights: 'auto'
+
+    # training parameters
+    loss: "mask"
+    lr: 3e-4
+    n_train_samples_per_epoch: 
+    n_eval_samples: 
+    max_epochs: 20
+    weight_decay: 0.05
+
+    # scheduler settings
+    scheduler: "CosineAnnealingLR" # "ReduceLROnPlateau"
+    scheduler_T_max: 20
+    lr_warmup_steps: 5
+    lr_start: 0.1
+
+    # dropouts
+    path_drop_rate: 0.
+    mlp_drop_rate: 0.
+    attn_drop_rate: 0.
+
+    # wireup stuff
+    wireup_info: "mpi"
+    wireup_store: "tcp"
+
+    num_data_workers: 1
+
+    ics_type: "specify_number"
+    save_raw_forecasts: !!bool True
+    save_channel: !!bool False
+    masked_acc: !!bool False
+    maskpath: None
+    perturb: !!bool False
+    add_noise: !!bool False
+    noise_std: 0.
+
+    # network related
+    nettype: "ViT"
+    depth: 8
+    model_grid_type: "equiangular"
+    patch_size: [8, 8]
+    num_heads: 4
+    embed_dim: 384
+    normalization_layer: "layer_norm"
+    pos_embed_scheme: 'sprepe'
+
+    target: "default" 
+
+    normalization: "zscore" #options zscore or minmax
+    hard_thresholding_fraction: 1.0
+  
+    # extra channels
+    add_grid: !!bool False
+    gridtype: "sinusoidal"
+    grid_num_frequencies: 16
+    roll: !!bool False
+    add_zenith: !!bool False
+    # invariants
+    add_orography: !!bool False
+    orography_path: 
+    add_landmask: !!bool False
+    landmask_path: 
+
+
+    finetune: !!bool False
+
+    optimizer_type: "Adam"
+    optimizer_beta1: 0.9
+    optimizer_beta2: 0.999
+    optimizer_max_grad_norm: 1.0 
+
+vit_73ch: &VIT_73CH
+    <<: *BASE_CONFIG
+    max_epochs: 20
