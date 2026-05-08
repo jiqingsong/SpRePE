@@ -17,6 +17,10 @@ Data can be obtained from the following sources.
   ./spherical_mnist/generate.sh
   ```
 
+### Structured3D
+* Download Structured3D: Please refer to the official Structured3D website at https://structured3d-dataset.org/
+. The data processing and split protocol follow https://github.com/bertjiazheng/Structured3D
+.
 ### ERA5
 
 * Download ERA5: [https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
