@@ -11,7 +11,7 @@ INFER="makani/inference.py"
 
 # 固定参数
 FIXED_CONFIG="vit_73ch"
-FIXED_RUNNUM="vit_s3d_infer_rotate_all3"
+FIXED_RUNNUM="runnum"
 RUNNUM=(
   "vit_sprepe"
 )
@@ -24,12 +24,12 @@ YAMLS=(
 CKPTS=(
   'path/to/training_checkpoints'
 )
-# 端口与日志
+
 BASE_PORT=14050
 LOG_ROOT="logs_s3d_infer/$(date +%Y%m%d-%H%M%S)_$FIXED_RUNNUM"
 mkdir -p "$LOG_ROOT"
 
-# ===== 并行启动 =====
+
 for i in "${!YAMLS[@]}"; do
   YAML="${YAMLS[$i]}"
   GPU="${GPU_IDS[$(( i % ${#GPU_IDS[@]} ))]}"
@@ -39,7 +39,6 @@ for i in "${!YAMLS[@]}"; do
   CKPT="${CKPTS[$i]}"
   echo "[LAUNCH] yaml=$YAML | --config=$FIXED_CONFIG | --run_num=$FIXED_RUNNUM | GPU=$GPU | MASTER_PORT=$PORT | CKPT=$CKPT"
 
-  # 每个进程绑定到一张独立 GPU，并使用独立端口
   CUDA_VISIBLE_DEVICES="$GPU" MASTER_PORT="$PORT" \
   mpirun -np 1 --allow-run-as-root \
     -x CUDA_VISIBLE_DEVICES -x MASTER_PORT -x WANDB_MODE -x MODULUS_DISTRIBUTED_INITIALIZATION_METHOD \
