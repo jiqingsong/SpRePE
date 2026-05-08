@@ -9,7 +9,6 @@ export MKL_NUM_THREADS=${MKL_NUM_THREADS:-4}
 PYTHON="path/to/python"
 INFER="makani/inference.py"
 
-# 固定参数
 FIXED_CONFIG="vit_73ch"
 FIXED_RUNNUM="runnum"
 RUNNUM=(
